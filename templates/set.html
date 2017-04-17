@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
-
+{%  block header %}<h2 class="name">Enter a time and save!</h2>{% endblock %}
 {% block content %}
 <form action="/timer">
-    <h1>This will likely be deprecated!</h1>
-    <div>
-        <input id="hr" type="number" min="0" max="90" placeholder="HH">
-        <input id="mn" type="number" min="0" max="90" placeholder="MM">
-        <input id="sec" type="number" min="0" max="59" placeholder="SS">
-        <button type="submit" id="save" onclick="setNewTimer()">Save</button>
+    <div class="wrapper">
+        <div class="container">
+            <h3 class="container-heading">This will likely be deprecated!</h3>
+            <input id="hr" type="number" min="0" max="90" placeholder="HH">
+            <input id="mn" type="number" min="0" max="90" placeholder="MM">
+            <input id="sec" type="number" min="0" max="59" placeholder="SS">
+            <button type="submit" id="save" onclick="setNewTimer()">Save</button>
+        </div>
     </div>
 </form>
 <script src="/static/script.js{{ query }}"></script>

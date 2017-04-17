@@ -9,6 +9,7 @@ pH on brew day
 - have brewing calculators
 - chart mash temp in real time
 - be able to modify/update bsmx files on the fly with hops changes, etc.
+- users for the app (set up with flask?)
 
 I'd like to be able to store all of this locally for easy access
 as well as write it back to xml/bsmx/Google sheets.

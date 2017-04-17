@@ -1,12 +1,17 @@
 {% extends 'layout.html' %}
+{%  block header %}<h2 class="name">Recipes</h2>{% endblock %}
 {% block content %}
-<section id="main-content">
-    <form action="{{ url_for('saverecipe') }}" id="recipes" method="post">
+<section class="wrapper">
+    <form action="{{ url_for('saverecipe') }}" class="container" id="recipes" method="post">
+        <h3 class="container-heading">select a recipe</h3>
+        <ul>
         {% for recipe in recipes %}
-        <input type="radio" name="recipe" value="{{ recipe }}"
-        {% if recipes['recipes'] == recipe %}checked{% endif %}>{{ recipe }}<br>
-        {% endfor %}
-        <br><br>
+            <li>
+            <input type="radio" name="recipe" value="{{ recipe }}"
+            {% if recipes['recipes'] == recipe %}checked{% endif %}>{{ recipe }}<br>
+            {% endfor %}
+            </li>
+        </ul>
         <input type="submit" value="Brew It!">
     </form>
 </section>

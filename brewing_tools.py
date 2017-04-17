@@ -71,6 +71,11 @@ class BeerXMLParser(object):
         self.boil_time = self.recipe.find('BOIL_TIME').text.split('.')[0]
         self.brew_type = self.recipe.find('TYPE').text
 
+        ### I think EST is what we need here?!!! ###
+        # self.volume = self.recipe.find('BATCH_SIZE').text
+        # self.og = self.recipe.find('EST_OG').text
+        # self.abv = self.recipe.find('EST_ABV').text
+
         self.set_mash_steps()
         self.set_hops()
 

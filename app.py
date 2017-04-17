@@ -6,13 +6,13 @@ import json
 from brewing_tools import BeerXMLParser
 
 app = Flask(__name__)
-# Timer object for setting our xml data
+# Object brewing_tools for setting our xml data
 recipe_data = BeerXMLParser()
-# may move this locally to the recipes view
 FPATH = os.getcwd() +'//recipes//'
-# default value has to be a dict with some value
+# default value for recipe name
 recipe_name = {'recipe':"no recipe"}
 
+# cache buster
 def new_url():
     query = random.randint(100000000, 999999999)
     return '?q={}'.format(query)

@@ -12,7 +12,7 @@
             localStorage['hop_adds'] = hop_adds
             localStorage['steps'] = steps;
             localStorage['recipeName'] = "{{ data['recipe_name'] }}";
-            // set this to -1 so that nextTimer() will set a 0 index the script loads
+            // set this to -1 so that nextTimer() will set a 0 index when the script loads
             localStorage['stepIndex'] = '-1';
             localStorage['recipeLoaded'] = "true";
         }
@@ -20,21 +20,20 @@
     {% endif %}
 {% endblock %}
 {% block header %}
-    <h2 id="recipeName"></h2>
-    <ul id="recipeVitals">
-        <li>Batch Size: 11 Gal</li>
-        <li>Est OG: 1.060</li>
-        <li>Est FG: 1.015</li>
-        <li id="last">Est ABV: 6%</li>
+    <h2 class="name" id="recipeName"></h2>
+    <ul class="recipe-details">
+        <li>Vol: 11 gal</li>
+        <li>OG: 1.060</li>
+        <li>ABV: 6.0%</li>
     </ul>
 {% endblock %}
-
+<!-- nav content is included here from layout.html -->
 {% block content %}
-    <section id="main-content">
-        <div id="timer-content">
-            <h3 id="current_step"></h3>
-            <h1 id="timer">00:00</h1>
-            <div id="timer-buttons">
+    <section class="wrapper">
+        <div class="timer-container">
+            <h3 class="container-heading" id="current_step"></h3>
+            <h1 class="timer-display" id="timer">00:00</h1>
+            <div class="timer-buttons">
                 <button onclick="startTimer()" id="start">start</button>
                 <button onclick="stopTimer()" id="stop">stop</button>
                 <button onclick="resetTimer()" id="reset">Reset</button>
@@ -43,35 +42,32 @@
             </div>
         </div>
         {# list of mash steps #}
-        <div id="mash-steps">
-            <h3>Mash Steps</h3>
+        <div class="container">
+            <h3 class="container-heading">Mash Steps</h3>
             <ul>
                 {% for step in range(data['mash'] | length) %}
-                <li><p>{{ "{0} - {2}".format(*data['mash'][step]) }}</p>
-                    <p>&deg;</p>
-                    <p>{{ " for {1} minutes".format(*data['mash'][step]) }}</p>
-                </li>
+                <li>{{ "{0} - {2}".format(*data['mash'][step]) }} &deg; {{ " for {1} minutes".format(*data['mash'][step]) }}</li>
                 {% endfor %}
             </ul>
         </div>
         {# list of boil additions #}
-        <div id="boil-additions">
-            <h3>Boil Additons</h3>
+        <div class="container">
+            <h3 class="container-heading">Boil Additons</h3>
             <ul>
                 {% for hops in data['boil'] | sort(reverse=True) %}
                     {% for hop in data['boil'][hops] %}
-                    <li><p>{{ "{2} minutes - add {1}oz of {0}".format(*hop) }}</p></li>
+                    <li>{{ "{2} minutes - add {1}oz of {0}".format(*hop) }}</li>
                     {% endfor %}
                 {% endfor %}
             </ul>
         </div>
     </section>
-    <section id="manual-timer">
+    <footer>
         <h3>Set a Manual Timer</h3>
         <input id="hr" type="number" min="0" max="90" placeholder="HH">
         <input id="mn" type="number" min="0" max="90" placeholder="MM">
         <input id="sec" type="number" min="0" max="59" placeholder="SS">
         <button type="submit" id="save" onclick="setTimer()">Save</button>
-    </section>
+    </footer>
     <script src="/static/timer.js{{ query }}"></script>
 {% endblock %}

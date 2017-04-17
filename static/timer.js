@@ -39,17 +39,14 @@ function runTimer() {
     if (localStorage['isRunning']) {
         var endTime = Number(localStorage['endTime']);
         var remainingTime = endTime - Date.now();
-
         hopCheck(remainingTime);
         // adding some buffer time to make sure we don't lose any time
         if (remainingTime % 1000 < 10) {
             endTime += 441;
             localStorage['endTime'] = endTime;
         }
-
         localStorage['remainingTime'] = remainingTime;
         formatDisplay(remainingTime);
-
         if (remainingTime > 999) {
             timer = setTimeout(runTimer, 1000);
         } else {
@@ -120,23 +117,17 @@ function nextTimer() {
         setTimer();
     }
 }
-// deprecate  this outter if/else!!!
-if (!localStorage['newTimer']) {
-    if (localStorage['recipeLoaded']) {
-        recipeName.innerHTML = localStorage['recipeName']
-        nextTimer();
-        localStorage['recipeLoaded'] = '';
 
-    } else {
-        formatDisplay(localStorage['remainingTime']);
-        var index = Number(localStorage['stepIndex'])
-        var parsed = JSON.parse(steps);
-        recipeName.innerHTML = localStorage['recipeName']
-        current_step.innerHTML = parsed[index][0];
-        runTimer();
-    }
+if (localStorage['recipeLoaded']) {
+    recipeName.innerHTML = localStorage['recipeName']
+    nextTimer();
+    localStorage['recipeLoaded'] = '';
 
 } else {
-    localStorage['newTimer'] = '';
     formatDisplay(localStorage['remainingTime']);
+    var index = Number(localStorage['stepIndex'])
+    var parsed = JSON.parse(steps);
+    recipeName.innerHTML = localStorage['recipeName']
+    current_step.innerHTML = parsed[index][0];
+    runTimer();
 }
